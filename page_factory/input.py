@@ -13,7 +13,7 @@ class Input(Component):
         with allure.step(f'Fill {self.type_of} "{self.name}" to value "{value}"'):
             locator = self.get_locator(**kwargs)
             locator.fill(value)
-
+            self.logger.info(f'Fill {self.type_of} "{self.name}" to value "{value}"')
             if validate_value:
                 self.should_have_value(value, **kwargs)
 

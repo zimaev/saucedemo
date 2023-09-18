@@ -1,5 +1,5 @@
 from abc import ABC, abstractmethod
-import logging
+from helper.log import logger
 import allure
 from playwright.sync_api import Locator, Page, expect
 
@@ -8,6 +8,7 @@ class Component(ABC):
     def __init__(self, page: Page, locator: str, name: str) -> None:
         self.page = page
         self.name = name
+        self.logger = logger
         self.locator = locator
 
     @property
@@ -22,6 +23,7 @@ class Component(ABC):
     def click(self, **kwargs) -> None:
         with allure.step(f'Clicking {self.type_of} with name "{self.name}"'):
             locator = self.get_locator(**kwargs)
+            logger.info(f'Clicking {self.type_of} with name "{self.name}"')
             locator.click()
 
     def should_be_visible(self, **kwargs) -> None:

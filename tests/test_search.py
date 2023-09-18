@@ -27,5 +27,10 @@ class TestLogin:
         login_page.login_form.fill_password_input(password)
         login_page.login_form.click_login_button()
 
-    def test_failed_login(self):
-        pass
+    def test_failed_login(self, login_page):
+        login_page.visit(BASE_URL)
+        login_page.login_form.fill_username_input("locked_out_user")
+        login_page.login_form.fill_password_input("secret_sauce")
+        login_page.login_form.click_login_button()
+
+
